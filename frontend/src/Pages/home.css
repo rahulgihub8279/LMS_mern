@@ -1,0 +1,14 @@
+@keyframes fastPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.01);
+    opacity: 0.9;
+  }
+}
+
+.animate-fast-pulse {
+  animation: fastPulse 0.8s infinite;
+}

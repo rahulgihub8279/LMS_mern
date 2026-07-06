@@ -6,7 +6,7 @@ import uploadOnCloudinary from "../config/cloudinary.js";
 export const createLecture = async (req, res) => {
   try {
     const { courseId } = req.params;
-    const { lectureTitle, vedioUrl, isPreviewFree } = req.body;
+    const { lectureTitle } = req.body;
     if (!lectureTitle || !courseId) {
       return res.status(400).json({ message: "lecture title required" });
     }

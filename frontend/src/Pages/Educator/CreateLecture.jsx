@@ -36,7 +36,7 @@ export default function CreateLecture() {
   useEffect(() => {
     const getCourseLecture = async () => {
       try {
-        const response = await axios.get(
+        const response = await axios.get(0
           `${serverUrl}/api/lecture/get-course-lecture/${courseId}`,
           { withCredentials: true },
         ); 

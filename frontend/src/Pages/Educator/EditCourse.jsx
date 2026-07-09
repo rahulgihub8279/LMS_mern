@@ -153,14 +153,14 @@ export default function EditCourse() {
           <div className="flex flex-row gap-4">
             {!isPublished ? (
               <button
-                className="w-[145px] flex items-center justify-center px-4 py-2 rounded active:scale-98 transition bg-green-200 text-green-700 border-2 border-green-500 text-sm cursor-pointer hover:bg-green-300 duration-200"
+                className="w-[150px] flex items-center justify-center px-4 py-2 rounded active:scale-98 transition bg-green-200 text-green-700 border-2 border-green-500 text-sm cursor-pointer hover:bg-green-300 duration-200"
                 onClick={() => setIsPublished(!isPublished)}
               >
                 Click to publish
               </button>
             ) : (
               <button
-                className="w-[145px] flex items-center justify-center px-4 py-2 rounded active:scale-98 transition bg-green-200 text-green-700 border-2 border-green-500 text-sm cursor-pointer hover:bg-green-300 duration-200"
+                className="w-[150px] flex items-center justify-center px-4 py-2 rounded active:scale-98 transition bg-green-200 text-green-700 border-2 border-green-500 text-sm cursor-pointer hover:bg-green-300 duration-200"
                 onClick={() => setIsPublished(!isPublished)}
               >
                 Click to unPublish

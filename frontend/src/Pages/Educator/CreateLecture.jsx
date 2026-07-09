@@ -7,6 +7,7 @@ import { serverUrl } from "../../App.jsx";
 import { ClipLoader } from "react-spinners";
 import { setLectureData } from "../../redux/lectureSlice.js";
 import { toast } from "react-toastify";
+import { FiEdit } from "react-icons/fi";
 
 export default function CreateLecture() {
   const navigate = useNavigate();
@@ -36,10 +37,10 @@ export default function CreateLecture() {
   useEffect(() => {
     const getCourseLecture = async () => {
       try {
-        const response = await axios.get(0
+        const response = await axios.get(
           `${serverUrl}/api/lecture/get-course-lecture/${courseId}`,
           { withCredentials: true },
-        ); 
+        );
         dispatch(setLectureData(response.data.course.lectures));
       } catch (err) {
         console.log(err.message);
@@ -91,6 +92,25 @@ export default function CreateLecture() {
                 "+ Create Lecture"
               )}
             </button>
+          </div>
+          {/* lecture list  */}
+          {lectureData.length === 0 && <div className="font-medium ml-2">no lectures </div>}
+          <div className="space-y-2">
+            {lectureData?.map((lecture, index) => (
+              <div
+                key={index}
+                className="bg-gray-200 rounded flex justify-between items-center p-3 text-sm font-medium text-gray-700"
+              >
+                <span>{`Lecture - ${index + 1}: ${lecture.lectureTitle}`}</span>
+                <FiEdit
+                  className="w-6 cursor-pointer hover:scale-109 transition duration-200"
+                  size={17}
+                  onClick={() =>
+                    navigate(`/edit-lecture/${courseId}/${lecture._id}`)
+                  }
+                />
+              </div>
+            ))}
           </div>
         </div>
       </div>

@@ -30,7 +30,7 @@ export default function Nav() {
   };
 
   return (
-    <div className="w-full h-[70px] z-1  mt-3 fixed top-0 px-5 py-2 flex items-center justify-between bg-transparent">
+    <div className="w-full h-18 z-50  mt-0 top-1 fixed rounded-full px-5 py-2 flex items-center justify-between bg-[#e9ecef]/60 backdrop-blur-md shadow-lg border-blue-800/30 ">
       <Link
         to={"/"}
         className="text-white flex items-center lg:pl-5 px-4 py-2 rounded-3xl bg-[#0a0f09f4]"
@@ -41,7 +41,7 @@ export default function Nav() {
         </span>
       </Link>
       {/* {"right"} */}
-      <div className="w-auto items-center justify-center hidden md:flex gap-7 bg-[#00000028] px-8 py-2 rounded-4xl">
+      <div className="w-auto items-center justify-center hidden md:flex gap-7 bg-transparent px-8 py-2 rounded-4xl">
         {userData?.photoUrl && (
           <img
             src={userData.photoUrl}
@@ -60,7 +60,7 @@ export default function Nav() {
         )}
         {userData?.role === "educator" && (
           <div
-            className="px-4 py-2 border border-white text-white bg-black rounded-4xl cursor-pointer font-light"
+            className="px-4 py-2  text-white bg-black rounded-4xl cursor-pointer font-light"
             onClick={() => navigate("/dashboard")}
           >
             Dashboard

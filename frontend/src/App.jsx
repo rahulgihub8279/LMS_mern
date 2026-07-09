@@ -15,12 +15,13 @@ const CreateCourse = lazy(() => import("./Pages/Educator/CreateCourse.jsx"));
 const EditCourse = lazy(() => import("./Pages/Educator/EditCourse.jsx"));
 const AllCourses = lazy(() => import("./Pages/AllCourses.jsx"));
 const CreateLecture = lazy(() => import("./Pages/Educator/CreateLecture.jsx"));
+const EditLecture = lazy(() => import("./Pages/Educator/EditLecture.jsx"));
+const ViewCourse = lazy(() => import("./Pages/ViewCourse.jsx"));
 
 import getCurrentUser from "./customHooks/getCurrentUser.js";
 import useGetCreatorCourse from "./customHooks/getCreatorCourse.js";
 import useGetPublishedCourses from "./customHooks/getPublishedCourses.js";
 import Loader from "./Pages/Loader.jsx";
-
 
 function App() {
   getCurrentUser();
@@ -102,6 +103,26 @@ function App() {
             element={
               userData?.role === "educator" ? (
                 <CreateLecture></CreateLecture>
+              ) : (
+                <Navigate to={"/login"}></Navigate>
+              )
+            }
+          ></Route>
+          <Route
+            path="/edit-lecture/:courseId/:lectureId"
+            element={
+              userData?.role === "educator" ? (
+                <EditLecture></EditLecture>
+              ) : (
+                <Navigate to={"/login"}></Navigate>
+              )
+            }
+          ></Route>
+          <Route
+            path="/view-course/:courseId"
+            element={
+              userData?.role === "educator" ? (
+                <ViewCourse></ViewCourse>
               ) : (
                 <Navigate to={"/login"}></Navigate>
               )

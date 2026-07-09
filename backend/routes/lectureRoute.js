@@ -18,6 +18,6 @@ router.post(
   upload.single("vedioUrl"),
   editLecture,
 );
-router.delete("delete-lecture/:lectureId", isAuth, removeLecture);
+router.delete("/delete-lecture/:lectureId", isAuth, removeLecture);
 
 export default router;

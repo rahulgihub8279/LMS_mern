@@ -47,7 +47,7 @@ export default function EditCourse() {
       formData.append("description", description);
       formData.append("level", level);
       formData.append("thumbnail", backendImage);
-
+      console.log(formData);
       const response = await axios.post(
         `${serverUrl}/api/course/edit/${courseId}`,
         formData,
@@ -105,8 +105,7 @@ export default function EditCourse() {
             withCredentials: true,
           },
         );
-        setSelectedCourse(response.data); 
-        
+        setSelectedCourse(response.data);
       } catch (err) {
         console.log(err.message);
       }
@@ -274,10 +273,9 @@ export default function EditCourse() {
                 value={level}
                 className="text-sm border-2 p-2 text-zinc-500 border-zinc-400 rounded outline-none"
               >
-                <option value="">Course level</option>
                 <option value="Beginner">Beginner</option>
                 <option value="Intermediate">Intermediate</option>
-                <option value="App development">Advanced</option>
+                <option value="Advanced">Advanced</option>
               </select>
             </div>
             {/* price  */}

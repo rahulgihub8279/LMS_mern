@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { serverUrl } from "../../App.jsx";
-import { ClipLoader } from "react-spinners";
+import { BarLoader, ClipLoader } from "react-spinners";
 import { setLectureData } from "../../redux/lectureSlice.js";
 import { toast } from "react-toastify";
 import { FiEdit } from "react-icons/fi";
@@ -14,6 +14,7 @@ export default function CreateLecture() {
   const { courseId } = useParams();
   const [lectureTitle, setLectureTitle] = useState("");
   const [loading, setLoading] = useState(false);
+  const [loadingl, setLoadingl] = useState(false);
   const dispatch = useDispatch();
   const { lectureData } = useSelector((state) => state.lecture);
 
@@ -37,6 +38,7 @@ export default function CreateLecture() {
   useEffect(() => {
     const getCourseLecture = async () => {
       try {
+        setLoadingl(true);
         const response = await axios.get(
           `${serverUrl}/api/lecture/get-course-lecture/${courseId}`,
           { withCredentials: true },
@@ -44,6 +46,8 @@ export default function CreateLecture() {
         dispatch(setLectureData(response.data.course.lectures));
       } catch (err) {
         console.log(err.message);
+      } finally {
+        setLoadingl(false);
       }
     };
     getCourseLecture();
@@ -51,7 +55,7 @@ export default function CreateLecture() {
 
   return (
     <div className="flex items-center justify-center bg-[#edf6f9] min-h-screen p-3 md:p-15">
-      <div className="bg-white shadow-xl rounded-xl w-full">
+      <div className="bg-white shadow-xl rounded-xl w-full min-h-[380px]">
         {/* {header} */}
         <div className="mb-6 p-5">
           <h1 className="text-3xl font-semibold text-zinc-800 mb-2">
@@ -94,24 +98,29 @@ export default function CreateLecture() {
             </button>
           </div>
           {/* lecture list  */}
-          {lectureData.length === 0 && <div className="font-medium ml-2">no lectures </div>}
-          <div className="space-y-2">
-            {lectureData?.map((lecture, index) => (
-              <div
-                key={index}
-                className="bg-gray-200 rounded flex justify-between items-center p-3 text-sm font-medium text-gray-700"
-              >
-                <span>{`Lecture - ${index + 1}: ${lecture.lectureTitle}`}</span>
-                <FiEdit
-                  className="w-6 cursor-pointer hover:scale-109 transition duration-200"
-                  size={17}
-                  onClick={() =>
-                    navigate(`/edit-lecture/${courseId}/${lecture._id}`)
-                  }
-                />
-              </div>
-            ))}
-          </div>
+          {loadingl ? (
+            <div>
+              <BarLoader height={7} width="full" speedMultiplier={1.6} />
+            </div>
+          ) : (
+            <div className="space-y-2">
+              {lectureData?.map((lecture, index) => (
+                <div
+                  key={index}
+                  className="bg-gray-200 rounded flex justify-between items-center p-3 text-sm font-medium text-gray-700"
+                >
+                  <span>{`Lecture - ${index + 1}: ${lecture.lectureTitle}`}</span>
+                  <FiEdit
+                    className="w-6 cursor-pointer hover:scale-109 transition duration-200"
+                    size={17}
+                    onClick={() =>
+                      navigate(`/edit-lecture/${courseId}/${lecture._id}`)
+                    }
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

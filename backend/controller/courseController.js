@@ -1,4 +1,5 @@
 import courseModel from "../models/courseModel.js";
+import userModel from "../models/userModel.js";
 import uploadOnCloudinary from "../config/cloudinary.js";
 
 export const createCourse = async (req, res) => {
@@ -20,7 +21,9 @@ export const createCourse = async (req, res) => {
 
 export const getPublishedCourses = async (req, res) => {
   try {
-    const courses = await courseModel.find({ isPublished: true }).populate("lectures");
+    const courses = await courseModel
+      .find({ isPublished: true })
+      .populate("lectures");
     if (!courses) {
       return res.status(400).json({ message: "courses not found" });
     }
@@ -42,6 +45,19 @@ export const getCreatorCourse = async (req, res) => {
   }
 };
 
+export const getCreatorById = async (req, res) => {
+  try {
+    const { userId } = req.body;
+    const user = await userModel.findById(userId).select("-password");
+    if (!user) {
+      return res.status(400).json({ message: "user not found" });
+    }
+    return res.status(200).json(user);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
+
 export const getCourseById = async (req, res) => {
   try {
     const { courseId } = req.params;
@@ -56,7 +72,7 @@ export const getCourseById = async (req, res) => {
 };
 
 export const getAllCourses = async (req, res) => {
-  try { 
+  try {
     const course = await courseModel.find();
     if (!course) {
       return res.status(400).json({ message: "courses not found" });
@@ -93,6 +109,7 @@ export const editCourse = async (req, res) => {
       description,
       level,
     } = req.body;
+    console.log(req.body);
     let thumbnail;
     if (req.file) {
       thumbnail = await uploadOnCloudinary(req.file.path);

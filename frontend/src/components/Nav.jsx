@@ -30,7 +30,7 @@ export default function Nav() {
   };
 
   return (
-    <div className="w-full h-18 z-50  mt-0 top-1 fixed rounded-full px-5 py-2 flex items-center justify-between bg-[#e9ecef]/60 backdrop-blur-md shadow-lg border-blue-800/30 ">
+    <div className="w-full h-18 z-50  mt-0 top-1 fixed rounded-full px-5 py-2 flex items-center justify-between bg-[#e9ecef]/20 backdrop-blur-sm shadow-lg border-blue-800/30">
       <Link
         to={"/"}
         className="text-white flex items-center lg:pl-5 px-4 py-2 rounded-3xl bg-[#0a0f09f4]"

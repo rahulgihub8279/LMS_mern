@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { setUserData } from "../redux/userSlice";
 import { signInWithPopup } from "firebase/auth";
 import { auth, providor } from "../../utils/firebase";
+import { IoArrowBackSharp } from "react-icons/io5";
 
 export default function Login() {
   const [show, setShow] = useState(false);
@@ -62,12 +63,14 @@ export default function Login() {
   };
   return (
     <div className="bg-[#ded9d9] w-screen h-screen flex items-center justify-center p-4">
+      
       <form
-        className="w-[90%] md:w-200 h-150 bg-white shadow-xl rounded-2xl flex "
+        className="w-[90%] relative md:w-200 h-150 bg-white shadow-xl rounded-2xl flex "
         onSubmit={(e) => e.preventDefault()}
         s
       >
         {/* left div  */}
+        <IoArrowBackSharp className="absolute top-5 left-5 w-6 h-6 mr-2 cursor-pointer" onClick={()=>navigate("/")}/>
         <div className="md:w-[50%] w-full h-full flex flex-col items-center justify-center gap-3">
           <h2 className="text-xl font-semibold">Welcome back</h2>
           <div className="flex flex-col gap-1 w-[80%] items-start justify-center px-3">

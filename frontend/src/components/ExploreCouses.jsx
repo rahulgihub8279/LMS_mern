@@ -10,7 +10,7 @@ import { VscAzureDevops } from "react-icons/vsc";
 
 export default function ExploreCouses() {
   return (
-    <div className="flex w-[96%] min-h-[50vh] flex-col md:flex-row items-center justify-center gap-5 px-[30px] py-5 bg-[#e9ecef] my-2 rounded-xl">
+    <div className="flex w-[96%] min-h-[50vh] flex-col md:flex-row items-center justify-center gap-5 px-[30px] py-5 bg-[#f1f1f1] my-2 rounded-xl">
       <div className="w-full md:w-[350px] px-5 py-7 md:px-10 flex flex-col items-start justify-center gap-4">
         <div className="flex flex-col">
           <span className="font-semibold text-4xl">Explore</span>

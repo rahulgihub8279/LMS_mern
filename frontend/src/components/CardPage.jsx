@@ -22,7 +22,7 @@ export default function CardPage() {
         Explore top-rated courses designed to boost your I skills, enhance
         careers, and unlock opportunities in tech, AI, business, and beyond .
       </span>
-      <div className="w-[95%] rounded-2xl min-h-screen flex items-start justify-center flex-wrap gap-6 md:gap-10 mb-10 bg-[#e9ecef] p-15">
+      <div className="w-[95%] rounded-2xl min-h-screen flex items-start sm:justify-center flex-wrap gap-6 md:gap-10 mb-10 bg-[#e9ecef] p-20">
         {popularCourses?.map((course, id) => (
           <Card
             key={id}

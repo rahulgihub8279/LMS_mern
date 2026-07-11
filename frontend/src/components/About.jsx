@@ -5,19 +5,19 @@ import { BsPatchCheckFill } from "react-icons/bs";
 
 export default function About() {
   return (
-    <div className="w-[95%] min-h-[50vh] flex flex-wrap items-center justify-center gap-6 mb-7 md:h-[70vh] border mx-5 p-2 border-zinc-300 rounded-2xl shadow">
+    <div className="w-[95%] min-h-[50vh] flex flex-wrap items-center justify-center md:gap-6 lg:gap-10 mb-7 md:h-[70vh] border mx-5 p-2 border-zinc-300 rounded-2xl shadow">
       {/* image  */}
-      <div className="md:w-[40%] w-full h-full  flex items-center justify-center relative">
+      <div className="md:w-[40%] w-full h-full flex items-center justify-center relative">
         <img
           src={tutor}
           className="rounded-xl object-cover w-full h-full"
           alt=""
         />
-        <div className="h-[45%] w-[55%] mx-auto absolute left-[50%] top-[52%] aspect-video flex items-center justify-center">
+        <div className="h-[45%] w-[55%] mx-auto absolute left-[50%] md:left-[60%] top-[52%] aspect-video flex items-center justify-center">
           <video
             src={coding}
-            className="w-full h-full object-cover rounded-xl border-3 border-zinc-200"
-            controls
+            className="w-full h-full object-cover rounded-xl border-4 border-zinc-200"
+            
             autoPlay
             loop
             muted
@@ -25,7 +25,7 @@ export default function About() {
         </div>
       </div>
       {/* about info */}
-      <div className="w-full h-full md:w-[50%] flex flex-col items-start justify-center px-[35px] lg:px-20 ">
+      <div className="w-full h-full md:w-[50%] flex flex-col items- justify-center px-[35px] lg:px-20 ">
         <div className="flex gap-3 items-center mb-3">
           <span className="font-medium text-2xl ">About us </span>
           <TbArrowBigRightLineFilled size={20} />

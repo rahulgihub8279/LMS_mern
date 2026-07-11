@@ -52,9 +52,9 @@ export default function Courses() {
         {/* courses table large */}
         <div className="relative hidden min-h-[80%] md:block bg-white rounded-xl shadow p-4 overflow-x-auto">
           <table className="w-full text-sm">
-            <thead className="border-b bg-gray-200 ">
+            <thead className="border-b bg-gray-200">
               <tr>
-                <th className="text-left py-3 px-4">Courses</th>
+                <th className="py-3 px-4 left-10 absolute">Courses</th>
                 <th className="text-left py-3 px-4">Price</th>
                 <th className="text-left py-3 px-4">Status</th>
                 <th className="text-left py-3 px-4">Action</th>
@@ -64,12 +64,12 @@ export default function Courses() {
               {creatorCourseData?.map((course, index) => (
                 <tr
                   key={index}
-                  className="border-b hover:bg-gray-200 transition duration-200"
+                  className="border-b bg-zinc-100 hover:bg-gray-200 transition duration-200"
                 >
-                  <td className="py-3 px-4 flex items-center justify-center gap-4">
+                  <td className="py-3 pl-9 flex items-center gap-4">
                     <img
                       src={course?.thumbnail}
-                      className="w-25 h-18 object-cover rounded-md"
+                      className="w-30 h-18 object-cover rounded-md"
                       alt="thumbnail"
                     />
                     <span>{course?.title}</span>

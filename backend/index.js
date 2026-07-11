@@ -5,13 +5,13 @@ import morgan from "morgan";
 const app = express();
 import dotenv from "dotenv";
 dotenv.config();
+const PORT = process.env.PORT;
 import authRouter from "./routes/authRoute.js";
 import userRouter from "./routes/userRoute.js";
 import courseRouter from "./routes/courseRoute.js";
 import lectureRouter from "./routes/lectureRoute.js";
 import paymentRouter from "./routes/paymentRoute.js";
 import connectDb from "./config/connectdb.js";
-const PORT = process.env.PORT;
 
 app.use(morgan("dev"));
 app.use(express.json());

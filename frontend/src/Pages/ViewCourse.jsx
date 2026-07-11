@@ -10,6 +10,8 @@ import { FaLock } from "react-icons/fa";
 import axios from "axios";
 import { serverUrl } from "../App.jsx";
 import Card from "../components/Card.jsx";
+import { toast } from "react-toastify";
+import { ClipLoader } from "react-spinners";
 
 export default function ViewCourse() {
   const navigate = useNavigate();
@@ -18,13 +20,16 @@ export default function ViewCourse() {
   const { courseData } = useSelector((state) => state.course);
   const { selectedCourse } = useSelector((state) => state.course);
   const [selectedLecture, setSelectedLecture] = useState(null);
+  const { userData } = useSelector((state) => state.user);
   const [creatorData, setCreatorData] = useState(null);
   const [creatorCourses, setCreatorCourses] = useState(null);
+  const [loadingEnroll, setLoadingEnroll] = useState(false);
+  const [enrolled, setEnrolled] = useState(false);
 
   useEffect(() => {
     const fetchCourseData = () => {
       try {
-        const course = courseData.find((course) => course._id === courseId);
+        const course = courseData?.find((course) => course._id === courseId);
         if (course) {
           dispatch(setSelectedCourse(course));
         }
@@ -32,8 +37,25 @@ export default function ViewCourse() {
         console.log(err.message);
       }
     };
+    const checkEnrollment = async () => {
+      try {
+        const verify = userData?.enrolledCourses?.some(
+          (c) =>
+            (typeof c === "string" ? c : c._id).toString() ===
+            courseId?.toString(),
+        );
+        if (verify) {
+          setEnrolled(true);
+        } else {
+          setEnrolled(false);
+        }
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
     fetchCourseData();
-  }, [courseData, courseId, dispatch]);
+    checkEnrollment();
+  }, [courseData, courseId, userData, dispatch]);
 
   useEffect(() => {
     const getCreatorData = async () => {
@@ -62,6 +84,47 @@ export default function ViewCourse() {
       setCreatorCourses(creatorCourse);
     }
   }, [creatorData, courseData]);
+
+  const handleEnroll = async (courseId) => {
+    try {
+      setLoadingEnroll(true);
+      const response = await axios.post(
+        `${serverUrl}/api/payment/razorpay-order`,
+        { courseId },
+        { withCredentials: true },
+      );
+      const options = {
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+        amount: response.data.amount,
+        currency: "INR",
+        name: "Course Buddy",
+        description: "course enrollment payment",
+        order_id: response.data.id,
+        handler: async function (res) {
+          try {
+            setLoadingEnroll(true);
+            const verifyPayment = await axios.post(
+              `${serverUrl}/api/payment/verify-payment`,
+              { userId: userData._id, courseId, ...res },
+              { withCredentials: true },
+            );
+            setEnrolled(true);
+            toast.success(verifyPayment.data.message);
+          } catch (err) {
+            toast.error(err.response?.data?.message);
+          } finally {
+            setLoadingEnroll(false);
+          }
+        },
+      };
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    } catch (err) {
+      toast.error(err.response?.data?.message);
+    } finally {
+      setLoadingEnroll(false);
+    }
+  };
 
   return (
     <div className="min-h-screen p-6 bg-[#edf6f9]">
@@ -111,9 +174,18 @@ export default function ViewCourse() {
                 <span className="font-semibold">₹ {selectedCourse?.price}</span>
               )}
             </div>
-            <button className="flex items-center justify-center px-6 py-3 rounded active:scale-98 transition bg-[#10002b] text-white text-sm cursor-pointer w-40 shadow mt-5">
-              Enroll Now
-            </button>
+            {enrolled ? (
+              <button className="flex items-center justify-center px-6 py-3 rounded active:scale-98 transition duration-200 bg-green-300 text-green-800 hover:bg-green-500 text-sm cursor-pointer w-40 shadow mt-5">
+                Watch Now
+              </button>
+            ) : (
+              <button
+                className="flex items-center justify-center px-6 py-3 rounded active:scale-98 transition bg-[#10002b] text-white text-sm cursor-pointer w-40 shadow mt-5"
+                onClick={() => handleEnroll(courseId)}
+              >
+                Enroll Now
+              </button>
+            )}
           </div>
         </div>
         {/* bottom section  */}

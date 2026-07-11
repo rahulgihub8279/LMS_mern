@@ -12,6 +12,7 @@ const razorpayInstance = new razorpay({
 export const razorpayOrder = async (req, res) => {
   try {
     const { courseId } = req.body;
+    
     const course = await courseModel.findById(courseId);
     if (!course) {
       return res.status(400).json({ message: "course not found !" });
@@ -22,8 +23,10 @@ export const razorpayOrder = async (req, res) => {
       receipt: `${courseId.toString()}`,
     };
     const order = await razorpayInstance.orders.create(options);
+    console.log(order)
     return res.status(200).json(order);
   } catch (err) {
+    console.log(err);
     return res.status(500).json({ message: err.message });
   }
 };
@@ -35,6 +38,7 @@ export const verifyPayment = async (req, res) => {
     if (orderInfo.status === "paid") {
       const user = await userModel.findById(userId);
       const course = await courseModel.findById(courseId).populate("lectures");
+      
       if (!user || !course) {
         return res.status(404).json({
           message: "user or course not found",

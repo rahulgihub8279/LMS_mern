@@ -175,7 +175,9 @@ export default function ViewCourse() {
               )}
             </div>
             {enrolled ? (
-              <button className="flex items-center justify-center px-6 py-3 rounded active:scale-98 transition duration-200 bg-green-300 text-green-800 hover:bg-green-500 text-sm cursor-pointer w-40 shadow mt-5">
+              <button className="flex items-center justify-center px-6 py-3 rounded active:scale-98 transition duration-200 bg-green-300 text-green-800 hover:bg-green-500 text-sm cursor-pointer w-40 shadow mt-5"
+              onClick={()=>navigate(`/view-lecture/${courseId}`)}
+              >
                 Watch Now
               </button>
             ) : (

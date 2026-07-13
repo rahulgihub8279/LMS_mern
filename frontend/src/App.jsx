@@ -17,12 +17,14 @@ const AllCourses = lazy(() => import("./Pages/AllCourses.jsx"));
 const CreateLecture = lazy(() => import("./Pages/Educator/CreateLecture.jsx"));
 const EditLecture = lazy(() => import("./Pages/Educator/EditLecture.jsx"));
 const ViewCourse = lazy(() => import("./Pages/ViewCourse.jsx"));
+const ViewLecture = lazy(() => import("./Pages/ViewLecture.jsx"));
+const MyCourses = lazy(() => import("./Pages/MyCourses.jsx"));
+const Loader = lazy(() => import("./Pages/Loader.jsx"));
 
+import ScrollToTop from "./customHooks/scrollToTop.jsx";
 import getCurrentUser from "./customHooks/getCurrentUser.js";
 import useGetCreatorCourse from "./customHooks/getCreatorCourse.js";
 import useGetPublishedCourses from "./customHooks/getPublishedCourses.js";
-import Loader from "./Pages/Loader.jsx";
-import ScrollToTop from "./customHooks/scrollToTop.jsx";
 
 function App() {
   getCurrentUser();
@@ -126,6 +128,14 @@ function App() {
             <Route
               path="/view-course/:courseId"
               element={<ViewCourse></ViewCourse>}
+            ></Route>
+            <Route
+              path="/view-lecture/:courseId"
+              element={userData ? <ViewLecture></ViewLecture> : <Login></Login>}
+            ></Route>
+            <Route
+              path="/my-courses"
+              element={userData ? <MyCourses></MyCourses> : <Login></Login>}
             ></Route>
             {""}
             <Route path="/*" element={<Badrequest></Badrequest>}></Route>

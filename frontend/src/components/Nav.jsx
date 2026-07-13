@@ -93,7 +93,7 @@ export default function Nav() {
             >
               My Profile
             </span>
-            <span className="transition duration-200 hover:bg-gray-400 rounded font-semibold w-full text-[14px] py-2 px-3">
+            <span className="transition duration-200 hover:bg-gray-400 rounded font-semibold w-full text-[14px] py-2 px-3" onClick={()=>navigate("/my-courses")}>
               My Courses
             </span>
           </div>

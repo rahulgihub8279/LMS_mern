@@ -23,7 +23,6 @@ export const razorpayOrder = async (req, res) => {
       receipt: `${courseId.toString()}`,
     };
     const order = await razorpayInstance.orders.create(options);
-    console.log(order)
     return res.status(200).json(order);
   } catch (err) {
     console.log(err);
@@ -35,6 +34,7 @@ export const verifyPayment = async (req, res) => {
   try {
     const { userId, courseId, razorpay_order_id } = req.body;
     const orderInfo = await razorpayInstance.orders.fetch(razorpay_order_id);
+    
     if (orderInfo.status === "paid") {
       const user = await userModel.findById(userId);
       const course = await courseModel.findById(courseId).populate("lectures");

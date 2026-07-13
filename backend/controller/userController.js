@@ -3,7 +3,7 @@ import userModel from "../models/userModel.js";
 
 export const getCurrentUser = async (req, res) => {
   try {
-    const user = await userModel.findById(req.userId).select("-password");
+    const user = await userModel.findById(req.userId).select("-password").populate("enrolledCourses");
     if (!user) {
       return res.status(404).json({ message: "user not found" });
     }
@@ -18,8 +18,7 @@ export const updateProfile = async (req, res) => {
     const userId = req.userId;
     const { desc, name } = req.body;
     let photoUrl; 
-    
-    if (req.file) {
+        if (req.file) {
       photoUrl = await uploadOnCloudinary(req.file.path);
     }
     const user = await userModel.findByIdAndUpdate(userId, {

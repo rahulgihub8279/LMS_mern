@@ -18,7 +18,9 @@ export default function Footer() {
           <ul className="text-sm space-y-1 transition-all duration-300">
             <li
               className="cursor-pointer hover:text-lime-300"
-              onClick={() => navigate("/")}
+              onClick={() => {
+                window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+              }}
             >
               Home
             </li>

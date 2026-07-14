@@ -45,7 +45,7 @@ export default function MyCourses() {
                   </p>
                 </div>
 
-                <button className="text-sm mt-2 bg-black text-white w-full py-2 rounded cursor-pointer hover:bg-zinc-500 trasition duration-200"
+                <button className="text-sm mt-2 bg-black text-white w-full py-2 rounded cursor-pointer hover:bg-white hover:text-black border border-gray-200 shadow trasition duration-300"
                  onClick={()=>navigate(`/view-lecture/${course?._id}`)} 
                 >
                   Watch Now

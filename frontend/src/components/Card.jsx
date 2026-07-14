@@ -1,7 +1,7 @@
 import { FaStar } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-export default function Card({ thumbnail, title, category, price, id }) {
+export default function Card({ thumbnail, title, category, price, id, rating }) {
   const navigate = useNavigate();
 
   return (
@@ -26,7 +26,7 @@ export default function Card({ thumbnail, title, category, price, id }) {
             <span className="text-gray-800 font-semibold">₹{price}</span>
           )}
           <span className="flex items-center text-lg gap-1">
-            <FaStar size={13} color="black" />5
+            <FaStar size={13} color="" />{rating}
           </span>
         </div>
       </div>

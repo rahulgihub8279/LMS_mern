@@ -25,7 +25,19 @@ export default function ViewCourse() {
   const [creatorCourses, setCreatorCourses] = useState(null);
   const [loadingEnroll, setLoadingEnroll] = useState(false);
   const [enrolled, setEnrolled] = useState(false);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
+  const [loadingReview, setLoadingReview] = useState(false);
 
+  const calculateAvgReview = (reviews) => {
+    if (!reviews || reviews.length === 0) {
+      return 0;
+    }
+    const total = reviews.reduce((sum, review) => sum + review.rating, 0);
+    return (total / reviews.length).toFixed(1);
+  };
+  const avgRating = calculateAvgReview(selectedCourse?.reviews)
+   
   useEffect(() => {
     const fetchCourseData = () => {
       try {
@@ -126,6 +138,24 @@ export default function ViewCourse() {
     }
   };
 
+  const handleReview = async () => {
+    try {
+      setLoadingReview(true);
+      await axios.post(
+        `${serverUrl}/api/review/create-review`,
+        { rating, comment, courseId },
+        { withCredentials: true },
+      );
+
+      toast.success("review submited");
+    } catch (err) {
+      toast.error(err?.response?.data?.message);
+    } finally {
+      setLoadingReview(false);
+      setComment("");
+      setRating(0);
+    }
+  };
   return (
     <div className="min-h-screen p-6 bg-[#edf6f9]">
       <div className="max-w-7xl mx-auto bg-white shadow-md rounded-xl p-6 space-y-6 relative">
@@ -161,9 +191,9 @@ export default function ViewCourse() {
             <div className="flex items-start justify-between flex-col ">
               <div className="text-yellow-500 font-medium gap-2 flex items-center mt-1 mb-2">
                 <span className="flex items-center gap-1 text-sm">
-                  <FaStar /> 0
+                  <FaStar /> {avgRating}
                 </span>
-                <span className="text-zinc-600 text-sm">(1,200 reviews)</span>
+                <span className="text-zinc-600 text-sm">({selectedCourse?.reviews?.length} reviews)</span>
               </div>
 
               {selectedCourse?.price === 0 ? (
@@ -175,8 +205,9 @@ export default function ViewCourse() {
               )}
             </div>
             {enrolled ? (
-              <button className="flex items-center justify-center px-6 py-3 rounded active:scale-98 transition duration-200 bg-green-300 text-green-800 hover:bg-green-500 text-sm cursor-pointer w-40 shadow mt-5"
-              onClick={()=>navigate(`/view-lecture/${courseId}`)}
+              <button
+                className="flex items-center justify-center px-6 py-3 rounded active:scale-98 transition duration-200 bg-green-300 text-green-800 hover:bg-green-500 text-sm cursor-pointer w-40 shadow mt-5"
+                onClick={() => navigate(`/view-lecture/${courseId}`)}
               >
                 Watch Now
               </button>
@@ -185,7 +216,11 @@ export default function ViewCourse() {
                 className="flex items-center justify-center px-6 py-3 rounded active:scale-98 transition bg-[#10002b] text-white text-sm cursor-pointer w-40 shadow mt-5"
                 onClick={() => handleEnroll(courseId)}
               >
-                Enroll Now
+                {loadingEnroll ? (
+                  <ClipLoader size={17} color="white"></ClipLoader>
+                ) : (
+                  "Enroll Now"
+                )}
               </button>
             )}
           </div>
@@ -272,29 +307,52 @@ export default function ViewCourse() {
           <h2 className="text-xl font-semibold mb-2">Write a review</h2>
           <div className="flex gap-1 mb-2">
             {[1, 2, 3, 4, 5].map((star) => (
-              <FaStar key={star} className="fill-zinc-500"></FaStar>
+              <FaStar
+                key={star}
+                onClick={() => setRating(star)}
+                className={star <= rating ? "fill-amber-300" : "fill-gray-300"}
+              ></FaStar>
             ))}
           </div>
           <textarea
             name="review"
             placeholder="write something"
+            onChange={(e) => setComment(e.target.value)}
+            value={comment}
             className="text-sm w-full p-2 border-zinc-400 rounded outline-0 resize-none border"
           ></textarea>
-          <button className="flex items-center justify-center px-4 py-2 rounded active:scale-98 transition bg-[#10002b] text-white text-sm cursor-pointer w-40 shadow mt-2">
-            Submit Review
+          <button
+            className="flex items-center justify-center px-4 py-2 rounded active:scale-98 transition bg-[#10002b] text-white text-sm cursor-pointer w-40 shadow mt-2"
+            onClick={handleReview}
+          >
+            {loadingReview ? (
+              <ClipLoader size={17}></ClipLoader>
+            ) : (
+              "Submit Review"
+            )}
           </button>
         </div>
         {/* creator details  */}
         <div className="flex items-start justify-center flex-col gap-4 p-4 mt-6 border-t">
-          <div className="mb-3">
-            <img
-              src={creatorData?.photoUrl}
-              className="w-20 h-20 rounded-full object-cover mt-5"
-              alt=""
-            />
-            <h2 className="font-semibold text-xl">{creatorData?.name}</h2>
-            <p className="text-sm text-zinc-700">{creatorData?.description}</p>
-            <p className="text-sm text-zinc-500">{creatorData?.email}</p>
+          <div className="mb-3 flex items-center gap-3">
+            {creatorData?.photoUrl ? (
+              <img
+                src={creatorData?.photoUrl}
+                className="w-15 h-15 rounded-full border-2 border-black object-cover "
+                alt=""
+              />
+            ) : (
+              <div className="w-15 h-15 flex items-center justify-center text-4xl rounded-full border-2 font-semibold border-black">
+                {creatorData?.name.slice(0, 1).toUpperCase()}
+              </div>
+            )}
+            <div>
+              <h2 className="font-semibold text-xl">{creatorData?.name}</h2>
+              <p className="text-sm text-zinc-700">
+                {creatorData?.description}
+              </p>
+              <p className="text-sm text-zinc-500">{creatorData?.email}</p>
+            </div>
           </div>
 
           <div className="">
@@ -302,6 +360,12 @@ export default function ViewCourse() {
               Other published courses by the educator
             </p>
           </div>
+        </div>
+        {creatorCourses?.length === 0 ? (
+          <div className="text-zinc-500  flex items-center justify-center">
+            <p>No other courses by creator</p>
+          </div>
+        ) : (
           <div className="w-full transition-all duration-300 py-5 flex items-center justify-center md:justify-start flex-wrap gap-6 md:px-15 border rounded-xl shadow border-zinc-300 ">
             {creatorCourses?.map((course, index) => (
               <Card
@@ -314,7 +378,7 @@ export default function ViewCourse() {
               ></Card>
             ))}
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

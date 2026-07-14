@@ -10,10 +10,17 @@ export default function CardPage() {
     setPopularCourses(courseData?.slice(0, 6));
   }, [courseData]);
 
+  const calculateAvgReview = (reviews) => {
+    if (!reviews || reviews.length === 0) {
+      return 0;
+    }
+    const total = reviews.reduce((sum, review) => sum + review.rating, 0);
+    return (total / reviews.length).toFixed(1);
+  }; 
+
   return (
     <div className="mx-5 mt-20 w-full relative flex gap-4 items-center justify-center flex-col">
       <div className="flex gap-5 items-center justify-center">
-         
         <h1 className="font-bold bg-[#000000] shadow-lg mb-5 shadow-cyan-600 transition-all duration-300 text-white px-8 py-2 rounded text-3xl md:text-4xl">
           Popular Courses
         </h1>
@@ -30,6 +37,7 @@ export default function CardPage() {
             title={course.title}
             category={course.category}
             price={course.price}
+            rating={calculateAvgReview(course?.reviews)}
             id={course._id}
           ></Card>
         ))}

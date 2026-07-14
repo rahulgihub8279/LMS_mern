@@ -25,11 +25,13 @@ import ScrollToTop from "./customHooks/scrollToTop.jsx";
 import getCurrentUser from "./customHooks/getCurrentUser.js";
 import useGetCreatorCourse from "./customHooks/getCreatorCourse.js";
 import useGetPublishedCourses from "./customHooks/getPublishedCourses.js";
+import useGetAllReviews from "./customHooks/getAllReviews.js";
 
 function App() {
   getCurrentUser();
   useGetCreatorCourse();
   useGetPublishedCourses();
+  useGetAllReviews();
 
   const { userData } = useSelector((state) => state.user);
 

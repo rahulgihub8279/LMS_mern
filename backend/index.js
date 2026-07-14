@@ -11,6 +11,7 @@ import userRouter from "./routes/userRoute.js";
 import courseRouter from "./routes/courseRoute.js";
 import lectureRouter from "./routes/lectureRoute.js";
 import paymentRouter from "./routes/paymentRoute.js";
+import reviewRouter from "./routes/reviewRoute.js";
 import connectDb from "./config/connectdb.js";
 
 app.use(morgan("dev"));
@@ -29,7 +30,7 @@ app.use("/api/user", userRouter);
 app.use("/api/course", courseRouter);
 app.use("/api/lecture", lectureRouter);
 app.use("/api/payment", paymentRouter);
-
+app.use("/api/review", reviewRouter);
 app.listen(PORT, () => {
   console.log(`server is listening on port ${PORT}`);
   connectDb();

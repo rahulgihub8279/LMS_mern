@@ -32,7 +32,9 @@ export default function Nav() {
   return (
     <div className="w-full h-18 z-50  mt-0 top-1 fixed rounded-full px-5 py-2 flex items-center justify-between bg-[#e9ecef]/20 backdrop-blur-sm shadow-lg border-blue-800/30">
       <Link
-        to={"/"}
+        onClick={() => {
+          window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+        }}
         className="text-white flex items-center lg:pl-5 px-4 py-2 rounded-3xl bg-[#0a0f09f4]"
       >
         <span className="font-extrabold text-2xl">Course</span>
@@ -93,7 +95,10 @@ export default function Nav() {
             >
               My Profile
             </span>
-            <span className="transition duration-200 hover:bg-gray-400 rounded font-semibold w-full text-[14px] py-2 px-3" onClick={()=>navigate("/my-courses")}>
+            <span
+              className="transition duration-200 hover:bg-gray-400 rounded font-semibold w-full text-[14px] py-2 px-3"
+              onClick={() => navigate("/my-courses")}
+            >
               My Courses
             </span>
           </div>
@@ -110,7 +115,7 @@ export default function Nav() {
       >
         <GrClose
           size={30}
-          className={`absolute right-10 top-9 ${!showHem ? "rotate-360" : "rotate-0" } transition-all duration-100`}
+          className={`absolute right-10 top-9 ${!showHem ? "rotate-360" : "rotate-0"} transition-all duration-100`}
           onClick={() => setShowHem(!showHem)}
         />
         {userData?.photoUrl ? (

@@ -22,9 +22,11 @@ export default function ExploreCouses() {
           inform users about the features and benefits of EduSphere and to
           encourage them to explore the platform.
         </p>
-        <button className="flex items-center gap-2 px-8 py-3  rounded active:scale-98 bg-[#10002b] text-white mt-2 text-md cursor-pointer hover:border-4 transition-all duration-300 hover:border-cyan-400">
-          Explore Courses <FaLocationArrow />
-        </button>
+        <div className="inline-block p-1 rounded-md bg-transparent transition-all duration-300 focus-within:bg-purple-700">
+          <button className="flex items-center gap-3 px-9 py-3 rounded bg-[#10002b] text-white text-md cursor-pointer active:scale-95 outline-none">
+            Explore Courses <FaLocationArrow />
+          </button>
+        </div>
       </div>
       <div className="w-[720px] max-w-[90%] md:min-h-[300px] flex items-center justify-center gap-12 md:gap-14 flex-wrap mb-12 md:mb-0">
         {""}

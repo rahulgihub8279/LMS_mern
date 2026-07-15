@@ -7,6 +7,7 @@ import Footer from "../components/Footer.jsx";
 import CardPage from "../components/CardPage.jsx";
 import { useNavigate } from "react-router-dom";
 import ai from "../assets/ai.png";
+import ReviewPage from "../components/ReviewPage.jsx";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -48,6 +49,8 @@ export default function Home() {
       <CardPage></CardPage>
       {/* about  */}
       <About></About>
+      {/* reviews  */}
+      <ReviewPage></ReviewPage>
       {/* footer  */}
       <Footer></Footer>
     </div>

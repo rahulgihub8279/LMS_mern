@@ -39,7 +39,16 @@ export const getReviews = async (req, res) => {
   try {
     const reviews = await reviewModel
       .find({})
-      .populate("user", "name photoUrl role")
+      .populate([
+        {
+          path: "user",
+          select: "photoUrl name description",
+        },
+        {
+          path: "course",
+          select: "title",
+        },
+      ])
       .sort({ createdAt: -1 });
     return res.status(200).json(reviews);
   } catch (err) {

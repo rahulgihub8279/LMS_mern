@@ -22,7 +22,7 @@ const MyCourses = lazy(() => import("./Pages/MyCourses.jsx"));
 const SearchWithAi = lazy(() => import("./Pages/SearchWithAi.jsx"));
 const Loader = lazy(() => import("./Pages/Loader.jsx"));
 
-import ScrollToTop from "./customHooks/scrollToTop.jsx";
+import ScrollToTop from "./customHooks/scrollToTop.js";
 import getCurrentUser from "./customHooks/getCurrentUser.js";
 import useGetCreatorCourse from "./customHooks/getCreatorCourse.js";
 import useGetPublishedCourses from "./customHooks/getPublishedCourses.js";

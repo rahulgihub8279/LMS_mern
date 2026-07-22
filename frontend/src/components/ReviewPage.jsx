@@ -1,14 +1,22 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import ReviewCard from "./ReviewCard.jsx";
+import ReviewCard from "./ReviewCard.jsx"; 
 
 export default function ReviewPage() {
-  const { reviewData } = useSelector((state) => state.review);
   const [latestReview, setLatestReview] = useState(null);
+  const { reviewData } = useSelector((state) => state.review);
+   
   useEffect(() => {
-    setLatestReview(reviewData?.slice(0, 6));
+    const updateReviews = async () => {
+      try { 
+        setLatestReview(reviewData?.slice(0, 6));
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+    updateReviews();
   }, [reviewData]);
-  console.log(latestReview)
+
   return (
     <div className="flex items-center justify-center flex-col w-[95%] rounded-xl shadow-lg shadow-gray-700 mb-5 bg-[linear-gradient(to_right,#3b0d63_0%,#100014_20%,#000000_50%,#1a0d4d_80%,#34217a_100%)]">
       <h1 className="font-semibold text-center mt-6 text-2xl md:text-4xl mb-6 text-white">
@@ -19,7 +27,7 @@ export default function ReviewPage() {
         through real feedback from students and Nav.jsx professionals worldwide.
       </span>
 
-      <div className="w-full min-h-screen flex items-center justify-center flex-wrap gap-12 p-2 md:p-7 lg:p-12 mb-10">
+      <div className="w-full min-h-screen flex items-center justify-center flex-wrap gap-6 p-2 md:p-7 lg:p-12 mb-10">
         {latestReview?.map((review, index) => (
           <ReviewCard
             key={index}

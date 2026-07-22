@@ -19,17 +19,17 @@ export default function CardPage() {
   }; 
 
   return (
-    <div className="mx-5 mt-20 w-full relative flex gap-4 items-center justify-center flex-col">
+    <div className="mx-5 mt-10 md:mt-20 w-full relative flex gap-4 items-center justify-center flex-col">
       <div className="flex gap-5 items-center justify-center">
-        <h1 className="font-bold bg-[#000000] shadow-lg mb-5 shadow-cyan-600 transition-all duration-300 text-white px-8 py-2 rounded text-3xl md:text-4xl">
+        <h1 className="font-bold bg-[#000000] shadow-lg mb-5 shadow-cyan-600 transition-all duration-300 text-white p-4 md:px-8 py-2 rounded  md:text-3xl text-xl">
           Popular Courses
         </h1>
       </div>
-      <span className="text-center text-xl text-[#415a77] font-semibold mx-20 mb-8">
+      <span className="text-center text-lg md:text-xl text-[#415a77] font-medium md:font-semibold mx-20 mb-8">
         Explore top-rated courses designed to boost your I skills, enhance
         careers, and unlock opportunities in tech, AI, business, and beyond .
       </span>
-      <div className="w-[95%] rounded-2xl min-h-screen flex items-start sm:justify-center flex-wrap gap-6 md:gap-10 mb-10 bg-[#e9ecef] p-20">
+      <div className="w-[95%] rounded-xl md:rounded-2xl min-h-screen flex items-start sm:justify-center flex-wrap  gap-10 mb-5 md:mb-10 bg-[#e9ecef] p-10 md:p-20">
         {popularCourses?.map((course, id) => (
           <Card
             key={id}

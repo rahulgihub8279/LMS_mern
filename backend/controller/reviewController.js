@@ -14,13 +14,7 @@ export const createReview = async (req, res) => {
     if (!course) {
       return res.status(400).json({ message: "course not found !" });
     }
-    const alreadyReviewed = await reviewModel.findOne({
-      course: courseId,
-      user: userId,
-    });
-    if (alreadyReviewed) {
-      return res.status(400).json({ message: "already reviewed" });
-    }
+
     const review = await reviewModel.create({
       course: courseId,
       user: userId,

@@ -1,4 +1,3 @@
-import { IoPersonCircleSharp } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -30,15 +29,15 @@ export default function Nav() {
   };
 
   return (
-    <div className="w-full h-18 z-50  mt-0 top-1 fixed rounded-full px-5 py-2 flex items-center justify-between bg-[#e9ecef]/20 backdrop-blur-sm shadow-lg border-blue-800/30">
+    <div className=" w-full h-18 z-50  mt-0 top-0 fixed rounded px-5 py-2 flex items-center justify-between bg-[#e9ecef]/20 backdrop-blur-sm shadow-lg border-blue-800/30">
       <Link
         onClick={() => {
           window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
         }}
-        className="text-white flex items-center lg:pl-5 px-4 py-2 rounded-3xl bg-[#0a0f09f4]"
+        className="text-white flex items-center lg:pl-5 px-4 py-2 rounded bg-[#0a0f09f4]"
       >
-        <span className="font-extrabold text-2xl">Course</span>
-        <span className="font-extrabold text-2xl">
+        <span className="font-extrabold text-lg md:text-2xl">Course</span>
+        <span className="font-extrabold text-lg md:text-2xl text-blue-600">
           Budd<span>Y</span>
         </span>
       </Link>
@@ -127,7 +126,7 @@ export default function Nav() {
           />
         ) : (
           <div
-            className="w-[43px] h-[43px] rounded-full text-white flex items-center justify-center text-[20px] border  bg-black cursor-pointer active:scale-95 transition-all duration-200"
+            className="w-[43px] h-[43px] rounded-full text-white flex items-center justify-center text-[20px] border bg-black cursor-pointer active:scale-95 transition-all duration-200"
             onClick={() => setShow(!show)}
           ></div>
         )}
@@ -137,7 +136,9 @@ export default function Nav() {
         >
           My Profile
         </span>
-        <span className="w-[60%] text-center flex items-center justify-center h-[10%] border border-white text-white bg-black rounded-md cursor-pointer font-light hover:bg-zinc-500 hover:text-black transition duration-200">
+        <span className="w-[60%] text-center flex items-center justify-center h-[10%] border border-white text-white bg-black rounded-md cursor-pointer font-light hover:bg-zinc-500 hover:text-black transition duration-200"
+        onClick={()=>navigate("/my-courses")}
+        >
           My Courses
         </span>
         {userData?.role === "educator" && (

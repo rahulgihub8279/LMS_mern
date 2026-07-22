@@ -19,6 +19,7 @@ const EditLecture = lazy(() => import("./Pages/Educator/EditLecture.jsx"));
 const ViewCourse = lazy(() => import("./Pages/ViewCourse.jsx"));
 const ViewLecture = lazy(() => import("./Pages/ViewLecture.jsx"));
 const MyCourses = lazy(() => import("./Pages/MyCourses.jsx"));
+const SearchWithAi = lazy(() => import("./Pages/SearchWithAi.jsx"));
 const Loader = lazy(() => import("./Pages/Loader.jsx"));
 
 import ScrollToTop from "./customHooks/scrollToTop.jsx";
@@ -138,6 +139,10 @@ function App() {
             <Route
               path="/my-courses"
               element={userData ? <MyCourses></MyCourses> : <Login></Login>}
+            ></Route>
+            <Route
+              path="/search-ai"
+              element={<SearchWithAi></SearchWithAi>}
             ></Route>
             {""}
             <Route path="/*" element={<Badrequest></Badrequest>}></Route>

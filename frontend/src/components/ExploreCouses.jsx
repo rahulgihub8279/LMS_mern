@@ -7,26 +7,32 @@ import { SiOpenaigym } from "react-icons/si";
 import { Si365Datascience } from "react-icons/si";
 import { TbCloudComputing } from "react-icons/tb";
 import { VscAzureDevops } from "react-icons/vsc";
+import { useNavigate } from "react-router-dom";
 
 export default function ExploreCouses() {
+  const navigate = useNavigate();
   return (
-    <div className="flex w-[96%] min-h-[50vh] flex-col md:flex-row items-center justify-center gap-5 px-[30px] py-5 bg-[#f1f1f1] my-2 rounded-xl">
-      <div className="w-full md:w-[350px] px-5 py-7 md:px-10 flex flex-col items-start justify-center gap-4">
-        <div className="flex flex-col">
-          <span className="font-semibold text-4xl">Explore</span>
-          <span className="font-semibold text-4xl">Our Courses</span>
+    <div className="flex w-[96%] min-h-[50vh] flex-col md:flex-row items-center justify-center gap-5 px-5 md:px-[30px] py-2 bg-white my-0 rounded-xl">
+      <div className="w-full md:w-[350px] px-0 py-2 md:px-6 flex flex-col items-center md:items-start justify-center gap-5 md:gap-10">
+        <div className="flex gap-2 md:gap-0 md:flex-col items-c">
+          <span className="font-semibold text-2xl md:text-4xl">Explore</span>
+          <span className="font-semibold text-2xl md:text-4xl">
+            Our Courses
+          </span>
         </div>
-        <p className="text-[17px] font-light tracking-tight">
+        <p className="text-sm md:text-[17px] font-light sm:text-center md:text-start tracking-tight">
           CourseBuddY LMS is an all-in-one platform for managing, teaching, and
           learning.This landing page was designed as a promotional tool to
           inform users about the features and benefits of EduSphere and to
           encourage them to explore the platform.
         </p>
-        <div className="inline-block p-1 rounded-md bg-transparent transition-all duration-300 focus-within:bg-purple-700">
-          <button className="flex items-center gap-3 px-9 py-3 rounded bg-[#10002b] text-white text-md cursor-pointer active:scale-95 outline-none">
-            Explore Courses <FaLocationArrow />
-          </button>
-        </div>
+
+        <button
+          className="flex items-center gap-3 px-6 py-3 rounded bg-[#10002b] text-white text-sm md:text-md cursor-pointer active:scale-95 outline-none"
+          onClick={() => navigate("/allCourses")}
+        >
+          Explore Courses <FaLocationArrow />
+        </button>
       </div>
       <div className="w-[720px] max-w-[90%] md:min-h-[300px] flex items-center justify-center gap-12 md:gap-14 flex-wrap mb-12 md:mb-0">
         {""}

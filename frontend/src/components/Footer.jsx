@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Footer() {
   const navigate = useNavigate();
@@ -7,7 +7,17 @@ export default function Footer() {
     <div className="bg-black text-white py-7 px-6 w-full">
       <div className="max-w-7xl mx-auto flex  items-start justify-center gap-10 lg:gap-35 flex-col lg:flex-row">
         <div className="lg:w-[40%] md:w-[50%] w-full">
-          <h1 className="text-3xl font-bold mb-3 text-lime-400">CourseBuddY</h1>
+          <Link
+            onClick={() => {
+              window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+            }}
+            className="text-white flex items-center mb-2 py-2 rounded bg-[#0a0f09f4]"
+          >
+            <span className="font-extrabold text-lg md:text-2xl">Course</span>
+            <span className="font-extrabold text-lg md:text-2xl text-blue-600">
+              Budd<span>Y</span>
+            </span>
+          </Link>
           <p className="text-sm">
             AI-powered learning platform to help you grow smarter. Learn
             aything, anytime, anywhere.

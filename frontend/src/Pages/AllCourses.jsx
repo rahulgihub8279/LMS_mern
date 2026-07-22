@@ -43,7 +43,7 @@ export default function AllCourses() {
     <div className="min-h-screen flex bg-[#e9ecef]">
       <Nav></Nav>
       <button
-        className={`fixed w-19 z-1 top-20 left-4 px-2 py-1 ml-5 text-sm rounded-lg ${sidebar ? "bg-white text-black" : "bg-blue-950 text-white"} cursor-pointer md:hidden font-light transition duration-200 `}
+        className={`fixed w-19 z-1 top-20 left-0 px-0 py-1 ml-5 text-sm rounded-lg ${sidebar ? "bg-white text-black" : "bg-blue-950 text-white"} cursor-pointer md:hidden font-light transition duration-200 `}
         onClick={() => setSidebar(!sidebar)}
       >
         {sidebar ? "hide <<" : "show >>"}

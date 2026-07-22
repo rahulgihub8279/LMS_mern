@@ -36,7 +36,7 @@ export default function Login() {
       dispatch(setUserData(response.data.user));
       toast.success("welcome back");
       navigate("/");
-    } catch (err) { 
+    } catch (err) {
       toast.error(err?.response?.data?.message || "something went wrong");
     } finally {
       setLoading(false);
@@ -46,12 +46,12 @@ export default function Login() {
     try {
       const response = await signInWithPopup(auth, providor);
       let user = response.user;
-      let gname =user.displayName
+      let gname = user.displayName;
       let Gmail = user.email;
-      let role = ""
+      let role = "";
       const createUser = await axios.post(
         `${serverUrl}/api/auth/googleauth`,
-        { name:gname,email: Gmail,role },
+        { name: gname, email: Gmail, role },
         { withCredentials: true },
       );
       dispatch(setUserData(createUser.data));
@@ -63,14 +63,15 @@ export default function Login() {
   };
   return (
     <div className="bg-[#ded9d9] w-screen h-screen flex items-center justify-center p-4">
-      
       <form
         className="w-[90%] relative md:w-200 h-150 bg-white shadow-xl rounded-2xl flex "
         onSubmit={(e) => e.preventDefault()}
-        s
       >
         {/* left div  */}
-        <IoArrowBackSharp className="absolute top-5 left-5 w-6 h-6 mr-2 cursor-pointer" onClick={()=>navigate("/")}/>
+        <IoArrowBackSharp
+          className="absolute top-5 left-5 w-6 h-6 mr-2 cursor-pointer"
+          onClick={() => navigate("/")}
+        />
         <div className="md:w-[50%] w-full h-full flex flex-col items-center justify-center gap-3">
           <h2 className="text-xl font-semibold">Welcome back</h2>
           <div className="flex flex-col gap-1 w-[80%] items-start justify-center px-3">
